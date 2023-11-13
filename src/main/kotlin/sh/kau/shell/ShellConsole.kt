@@ -16,44 +16,44 @@ class ShellConsole {
     const val ANSI_CYAN = "\u001B[36m"
     const val ANSI_WHITE = "\u001B[37m"
   }
+}
 
-  fun String.runInShell(
-    exitOnError: Boolean = false,
-    verbose: Boolean = false,
-  ): String {
-    if (verbose) println("$ANSI_GRAY[command] $this $ANSI_RESET")
-    val process =
-        ProcessBuilder()
-            // .directory(workingDirectory)
-            .redirectErrorStream(true)
-            .redirectOutput(ProcessBuilder.Redirect.PIPE)
-            .redirectError(ProcessBuilder.Redirect.PIPE)
-            // the /bin/bash -c -l is necessary if you use programs like "find" etc.
-            .command("/bin/bash", "-c", "-l", this)
-            .start()
-    process.waitFor(3, TimeUnit.MINUTES)
-    return process.retrieveOutput(exitOnError)
-  }
+fun String.runInShell(
+  exitOnError: Boolean = false,
+  verbose: Boolean = false,
+): String {
+  if (verbose) println("${ShellConsole.ANSI_GRAY}[command] $this ${ShellConsole.ANSI_RESET}")
+  val process =
+      ProcessBuilder()
+          // .directory(workingDirectory)
+          .redirectErrorStream(true)
+          .redirectOutput(ProcessBuilder.Redirect.PIPE)
+          .redirectError(ProcessBuilder.Redirect.PIPE)
+          // the /bin/bash -c -l is necessary if you use programs like "find" etc.
+          .command("/bin/bash", "-c", "-l", this)
+          .start()
+  process.waitFor(3, TimeUnit.MINUTES)
+  return process.retrieveOutput(exitOnError)
+}
 
-  private fun Process.retrieveOutput(exitOnError: Boolean): String {
-    val outputText = inputStream.bufferedReader().use(BufferedReader::readText)
-    val exitCode = exitValue()
-    if (exitCode != 0) {
-      val color = if(exitOnError) ANSI_RED else ANSI_YELLOW
-      val sign = if(exitOnError) "✗" else "⚠️"
+private fun Process.retrieveOutput(exitOnError: Boolean): String {
+  val outputText = inputStream.bufferedReader().use(BufferedReader::readText)
+  val exitCode = exitValue()
+  if (exitCode != 0) {
+    val color = if(exitOnError) ShellConsole.ANSI_RED else ShellConsole.ANSI_YELLOW
+    val sign = if(exitOnError) "✗" else "⚠️"
 
-      println(
-          """$color
+    println(
+        """$color
 $sign  [err: $exitCode] output:
 ------------------
 ${outputText.trim()}
-$ANSI_RESET""",
-      )
-      if (exitOnError) {
-        println("$ANSI_RED✗ Exiting... $ANSI_RESET")
-        exitProcess(1)
-      }
+${ShellConsole.ANSI_RESET}""",
+    )
+    if (exitOnError) {
+      println("${ShellConsole.ANSI_RED}✗ Exiting... ${ShellConsole.ANSI_RESET}")
+      exitProcess(1)
     }
-    return outputText.trim()
   }
+  return outputText.trim()
 }
