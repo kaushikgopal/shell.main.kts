@@ -21,11 +21,11 @@ import sh.kau.shell.runInShell
 
 Here's a sample `.main.kts` script:
 
-![screenshot_20231113_000107@2x.png](..%2F..%2FLibrary%2FApplication%20Support%2FCleanShot%2Fmedia%2Fmedia_leWuLYGcWj%2Fscreenshot_20231113_000107%402x.png)
+![screenshot_20231113_000106@2x.png](screenshots%2Fscreenshot_20231113_000106%402x.png)
 
 Here's the output:
 
-![screenshot_20231113_000106@2x.png](..%2F..%2FLibrary%2FApplication%20Support%2FCleanShot%2Fmedia%2Fmedia_q84JqaRArR%2Fscreenshot_20231113_000106%402x.png)
+![screenshot_20231113_000107@2x.png](screenshots%2Fscreenshot_20231113_000107%402x.png)
 
 ## FAQ
 
