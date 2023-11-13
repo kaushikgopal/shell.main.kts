@@ -39,10 +39,12 @@ class ShellConsole {
     val outputText = inputStream.bufferedReader().use(BufferedReader::readText)
     val exitCode = exitValue()
     if (exitCode != 0) {
-      val errorText = errorStream.bufferedReader().use(BufferedReader::readText)
+      val color = if(exitOnError) ANSI_RED else ANSI_YELLOW
+      val sign = if(exitOnError) "✗" else "⚠️"
+
       println(
-          """$ANSI_RED
-✗ [err: $exitCode] output:
+          """$color
+$sign  [err: $exitCode] output:
 ------------------
 ${outputText.trim()}
 $ANSI_RESET""",
