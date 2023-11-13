@@ -8,6 +8,37 @@ I aim to keep this super minimal and if Jetbrains ever gets to fixing KTIJ-16352
 
 # Usage
 
+## Commands
+
+There's really just one important command:
+
+```kotlin
+"command to be run in cli".runInShell()
+```
+
+`runInShell` takes two optional parameters:
+
+1. `verbose: Boolean` - print the command being executed
+2. `exitOnError: Boolean` - if a non 0 exit code is encountered, should we terminate the program?
+
+I've also included a common set of colors you might need to prettify your output:
+
+```kotlin
+const val ANSI_RESET = "\u001B[0m"   // reset to default terminal color (and not clobber)
+
+const val ANSI_GRAY = "\u001B[90m"   // use this mostly
+const val ANSI_PURPLE = "\u001B[35m" // input commands
+const val ANSI_GREEN = "\u001B[32m"  // highlighting values
+const val ANSI_RED = "\u001B[31m"    // error
+const val ANSI_YELLOW = "\u001B[33m" // important messages
+
+const val ANSI_BLUE = "\u001B[34m"
+const val ANSI_CYAN = "\u001B[36m"
+const val ANSI_WHITE = "\u001B[37m"
+```
+
+## Demo
+
 ```kotlin
 # in your xxx.main.kts script
 
@@ -21,11 +52,11 @@ import sh.kau.shell.runInShell
 
 Here's a sample `.main.kts` script:
 
-![screenshot_20231113_000106@2x.png](screenshots%2Fscreenshot_20231113_000106%402x.png)
+![screenshot_20231113_000107@2x.png](screenshots%2Fscreenshot_20231113_000107%402x.png)
 
 Here's the output:
 
-![screenshot_20231113_000107@2x.png](screenshots%2Fscreenshot_20231113_000107%402x.png)
+![screenshot_20231113_000106@2x.png](screenshots%2Fscreenshot_20231113_000106%402x.png)
 
 ## FAQ
 
