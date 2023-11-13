@@ -1,6 +1,6 @@
 plugins {
   java
-  kotlin("jvm")  version "1.6.0"
+  kotlin("jvm")  version "1.8.22"
   `maven-publish`
 }
 
@@ -9,17 +9,14 @@ repositories {
 }
 
 dependencies {
-  implementation(kotlin("stdlib-jdk8"))
+  implementation(kotlin("stdlib"))
   implementation(kotlin("script-runtime"))
 }
 
 tasks {
-  compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-  }
-  compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-  }
+//  compileKotlin {
+//    kotlinOptions.jvmTarget = "1.8"
+//  }
 }
 
 publishing {
