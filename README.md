@@ -43,7 +43,7 @@ const val ANSI_WHITE = "\u001B[37m"
 # in your xxx.main.kts script
 
 @file:Repository("https://jitpack.io")
-@file:DependsOn("com.github.kaushikgopal:shell.main.kts:1.0.1")
+@file:DependsOn("com.github.kaushikgopal:shell.main.kts:1.0.2")
 
 import sh.kau.shell.runInShell
 
